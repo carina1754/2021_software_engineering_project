@@ -75,11 +75,11 @@ public class MenuDAO {
 			
 			PreparedStatement pst = con.prepareStatement("DELETE FROM menu WHERE menu_id= ?");
 			pst.setString(1, Integer.toString(menu_id));
-			pst.executeQuery();
+			pst.executeUpdate();
 			
 			pst = con.prepareStatement("DELETE FROM review WHERE menu_id = ?");
 			pst.setString(1, Integer.toString(menu_id));
-			pst.executeQuery();
+			pst.executeUpdate();
 
 			return 1;
 			

@@ -126,7 +126,7 @@
 	      					<td><% out.println(String.format("%.2f", rv.get_review_average(ranking.get(i-1)))); %></td>
 	      					<td><% out.println(rv.get_review_count(ranking.get(i-1))); %></td>
 	      					<td>
-	      						<button type="button" class="btn btn-secondary" onclick="location.href=./bruger_delete_action.jsp?menu_id=<%out.println(i);%>">삭제</button>
+	      						<button name="<% out.print(ranking.get(i-1)); %>" type="button" class="btn btn-secondary" onclick="location.href='burger_delete_action.jsp?menu_id=<%out.print(ranking.get(i-1));%>'">삭제</button>
 	      					</td>
     					</tr>
   						<%

@@ -62,8 +62,12 @@ public class ReviewDAO {
 			rs = pst.executeQuery();
 			rs.next();
 			
+			if (rs.getString(1) != null) {
+				return Float.parseFloat(rs.getString(1));
+			}
 			
-			return Float.parseFloat(rs.getString(1));
+			
+			return 0;
 			
 			
 		} catch (Exception e) { e.printStackTrace(); return 0; }

@@ -12,7 +12,8 @@
 
 <%
 		MenuDAO menu = new MenuDAO();
-		int menu_id = Integer.parseInt(request.getParameter("menu_id"));
+		String button_name = request.getParameter("menu_id");
+		int menu_id = Integer.parseInt(button_name);
 		int result = menu.delete_menu(menu_id);
 		PrintWriter script = response.getWriter();
 		
@@ -23,8 +24,8 @@
 			script.println("</script>");
 		} else if (result == 1) {
 			script.println("<script>");
-			script.println("alert('성공적으로 삭제했습니다.')");
-			script.println("location.href = './Brand_Burger_Manage.jsp");
+			//script.println("alert('성공적으로 삭제했습니다.')");
+			script.println("location.href = './Brand_Burger_Manage.jsp'");
 			script.println("</script>");
 		}
 		
