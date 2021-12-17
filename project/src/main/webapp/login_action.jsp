@@ -21,7 +21,7 @@
 				}
 				else if(result == 1){//로그인 성공
 					script.println("<script>");
-					script.println("location.href = 'Main.jsp'");
+					script.println("location.href = ''mypage.jsp?name="+request.getParameter("id")+"''");
 					script.println("</script>");
 				}
 				else if(result == -1){//서버 오류

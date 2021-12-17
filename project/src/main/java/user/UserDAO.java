@@ -12,8 +12,12 @@ public class UserDAO {
 	
 	// -2: id 없음 / -1: 서버 오류 / 0: 비밀번호 틀림 / 1: 성공
 	public int login(String id, String pw) {
-		try { 
-			connect();
+		try {
+			String dbURL = "jdbc:mysql://localhost:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
+			String dbID = "root";
+			String dbPwd = "123123";
+			Class.forName("org.mariadb.jdbc.Driver");
+			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
 			PreparedStatement pst = con.prepareStatement("SELECT user_pw FROM user WHERE user_id = ?"); 
 			pst.setString(1, id); 
 			rs = pst.executeQuery();
@@ -32,7 +36,6 @@ public class UserDAO {
 			String dbPwd = "123123";
 			Class.forName("org.mariadb.jdbc.Driver");
 			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
-			System.out.println("asdasd");
 			PreparedStatement pst = con.prepareStatement("SELECT * FROM user WHERE user_id = ?");
 			pst.setString(1, id);
 			System.out.println(id);
