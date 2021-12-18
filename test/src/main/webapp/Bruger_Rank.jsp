@@ -1,18 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
-<%@ page import="java.util.*, java.text.*" %>
+<%@ page import="review.*" %>
+<%@ page import="menu.*" %>
 <%@ page import="brand.*" %>
-
-<%
-	BrandDAO brand_dao = new BrandDAO();
-	ArrayList<BrandRank> brandsRank = brand_dao.getBrandsRank();
-
-%>
+<%@ page import="java.util.*" %>
 
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Brand_Rank</title>
+        <title>Burger_Rank</title>
         
         <!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -85,45 +80,62 @@
             
             <!-- here to describe each pages -->
             
+            <%
+            	ReviewDAO rv = new ReviewDAO();
+            	BrandDAO br = new BrandDAO();
+				MenuDAO mn = new MenuDAO();
+            	int num_menu = mn.get_menu_count();
+             %>
+            
             <span style="font-size:3em">
-            	브랜드 순위
+            	버거 순위
             </span>
             
-            <div align="right">
-            	<button type="button" class="btn btn-primary btn-lg" id="save" onclick="">브랜드 관리</button>
-            </div>
+            <!--  <%
+            	String user_id = request.getParameter("user_id");
+            	if (user_id == "root"){
+            		%>
+	            		<div align="right">
+	            			<button type="button" class="btn btn-primary btn-lg" id="save" onclick="location.href='burger_delete_action.jsp'">메뉴 관리</button>
+	            		</div>
+            		
+            		<%
+            	}
+            
+            %> -->            
             
             <table class="table table-hover">
   				<thead>
     				<tr>
       					<th scope="col">No.</th>
-	      				<th scope="col">Brand Name</th>      					
+	      				<th scope="col">Brand</th>
+      					<th scope="col">Name</th>
       					<th scope="col">Rate</th>
       					<th scope="col">리뷰 개수</th>
     				</tr>
   				</thead>
-  				<tbody>
-  					
-  					<%
-  						int i = 0;
-  						for (i = 1; i <= brandsRank.size(); i++){
-  							
-  							%>
-  								<tr class="table-active">
-      								<th scope="row"><% out.print(i); %></th>
-			      					<td>
-					     				<% out.print(brandsRank.get(i-1).getBrand_name()); %>
-			      					</td>      					
-			      					<td><% out.print(String.format("%.2f", brandsRank.get(i-1).getReview_star())); %></td>
-			      					<td><% out.print(brandsRank.get(i-1).getReview_count()); %></td>
-			    				</tr>  							
-  							<% 							
-  						}
-  					
-  					%>
   				
-					
-    				
+  				<!-- tbody repeat, and select change -->
+  				
+  				<tbody>
+  				
+  				<%
+  					ArrayList<Integer> ranking = mn.burger_rank();
+  					int i = 0;
+  					for (i = 1; i <= num_menu; i++) {
+  						
+  						%> 
+  						<tr class="table-active">
+	      					<th scope="row"><% out.println(i); %></th>
+	      					<td> <% out.println(br.get_brand_name(mn.get_menu_brand_id(ranking.get(i-1)))); %>	</td>
+	      					<td> <% out.println(mn.get_menu_name(ranking.get(i-1))); %> </td>
+	      					<td> <% out.println(String.format("%.2f", rv.get_review_average(ranking.get(i-1)))); %> </td>
+	      					<td> <% out.println(rv.get_review_count(ranking.get(i-1))); %> </td>
+    					</tr>
+  						<%
+  					}
+  				%>
+  				
   				</tbody>
 			</table>
             

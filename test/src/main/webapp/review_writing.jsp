@@ -1,4 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, java.text.*" %>
+
+<%
+	Date date = new Date();
+	SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy/MM/dd");
+	String strdate = simpleDate.format(date);
+
+
+%>
+
 
 <html lang="en">
     <head>
@@ -57,23 +67,23 @@
 						</script>
 				      <div class="form-group">					      
 					      <p id='rangeValue'>2.5 점</p>
-					      <input type="range" id="range" class="custom-range" name="age">
+					      <input type="range" id="range" class="custom-range">
 				      </div>
  
                 </div>
                 
-                <div style="float:right;"><h4>작성일자:</h4></div>
+                <div style="float:right;"><h4>작성일자: <% out.print(strdate); %></h4></div>
                 <div style="float:right;"><h4>           </h4></div>
-                <div style="float:right;"><h4>작성자:			</h4></div>
+                <div style="float:right;"><h4>작성자:	<% out.print("           "); %>		</h4></div>
                 
                 <textarea data-min-height="150" class="form-control col-sm-5" rows="5" style="border: none">리뷰를 작성해주세요</textarea>                
             </div>
             
             <p style="height:50px"></p>
 
-            <div align="right">
-                <button type="button" class="btn btn-default" id="complete" align="center" onclick="location.href='login.jsp'">완료</button>
-                <button type="button" class="btn btn-default" id="cancel" onclick="location.href='regist.jsp'">취소</button>
+            <div align="right">                
+                <button type="button" class="btn btn-default" id="cancel" onclick='history.back(); return false;'>취소</button>
+                <button type="button" class="btn btn-default" id="complete" onclick="location.href='login.jsp'">완료</button>
             </div>
            
 

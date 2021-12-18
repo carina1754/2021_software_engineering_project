@@ -7,7 +7,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Admin_Page</title>
+        <title>Menu_Admin_Page</title>
         
         <!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -133,32 +133,35 @@
   					}
   				%>
   				
-  				
-    				<tr class="table-active">
-      					<th scope="row"><% out.println(i); %></th>
-      					<td>
-		     				<select class="form-control form-select-lg mb-3" aria-label="Default select example">
-		     				
-		     					<%
-		     						int brand_count = br.get_brand_count();
-		     						
-		     						for (int j = 1; j <= brand_count; j++) {
-		     							out.println("<option value=" + j + ">" + br.get_brand_name(j) + "</option>");
-		     						}
-
-		     					%>
-					
-							</select>
-      					</td>
-      					<td>
-      						<input type="text" class="form-control" placeholder="Burger Name" aria-describedby="basic-addon1">
-      					</td>
-      					<td></td>
-      					<td></td>
-      					<td>
-      						<button type="button" class="btn btn-secondary">추가</button>
-      					</td>
-    				</tr>
+  					<form action="burger_add_action.jsp?menu_id=<%= i %>" method="post">
+    					<tr class="table-active">
+	    					<th scope="row">
+	    						<% out.println(i); %>
+	    					</th>
+	      					<td>
+			     				<select class="form-control form-select-lg mb-3" aria-label="Default select example" name="brand_id">
+			     				
+			     					<%
+			     						int brand_count = br.get_brand_count();
+			     						
+			     						for (int j = 1; j <= brand_count; j++) {
+			     							out.println("<option value=" + j + ">" + br.get_brand_name(j) + "</option>");
+			     						}
+	
+			     					%>
+						
+								</select>
+	      					</td>
+	      					<td>
+	      						<input type="text" class="form-control" placeholder="Burger Name" aria-describedby="basic-addon1" name="menu_name">
+	      					</td>
+	      					<td></td>
+	      					<td></td>
+	      					<td>
+	      						<input type="submit" class="btn btn-secondary" value="추가"/>
+	      					</td>  					
+    					</tr>
+    				</form>
   				</tbody>
 			</table>
             

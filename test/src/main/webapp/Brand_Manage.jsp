@@ -1,4 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.*, java.text.*" %>
+<%@ page import="brand.*" %>
+
+<%
+	BrandDAO brand_dao = new BrandDAO();
+	ArrayList<BrandRank> brandsRank = brand_dao.getBrandsRank();
+
+%>
 
 <html lang="en">
     <head>
@@ -95,50 +104,41 @@
     				</tr>
   				</thead>
   				<tbody>
-    				<tr class="table-active">
-      					<th scope="row">1</th>
-      					<td>
-		     				<input type="text" class="form-control" placeholder="Brand Name" aria-describedby="basic-addon1" value="버거킹">
-      					</td>      					
-      					<td>4.8</td>
-      					<td>1467</td>
-      					<td>
-      						<button type="button" class="btn btn-secondary">삭제</button>
-      					</td>
-    				</tr>
-    				<tr class="table-active">
-      					<th scope="row">2</th>
-      					<td>
-		     				<input type="text" class="form-control" placeholder="Brand Name" aria-describedby="basic-addon1" value="맥도날드">
-      					</td>      					
-      					<td>4.7</td>
-      					<td>1320</td>
-      					<td>
-      						<button type="button" class="btn btn-secondary">삭제</button>
-      					</td>
-    				</tr>
-    				<tr class="table-active">
-      					<th scope="row">3</th>
-      					<td>
-		     				<input type="text" class="form-control" placeholder="Brand Name" aria-describedby="basic-addon1" value="롯데리아">
-      					</td>      					
-      					<td>4</td>
-      					<td>800</td>
-      					<td>
-      						<button type="button" class="btn btn-secondary">삭제</button>
-      					</td>
-    				</tr>
-    				<tr class="table-active">
-      					<th scope="row">4</th>
-      					<td>
-		     				<input type="text" class="form-control" placeholder="Brand Name" aria-describedby="basic-addon1">
-      					</td>      					
-      					<td></td>
-      					<td></td>
-      					<td>
-      						<button type="button" class="btn btn-secondary">추가</button>
-      					</td>
-    				</tr>
+  					
+  					<%
+  						int i = 0;
+  						for (i = 1; i <= brandsRank.size(); i++){
+  							
+  							%>
+  								<tr class="table-active">
+      								<th scope="row"><% out.print(i); %></th>
+			      					<td>
+					     				<input type="text" class="form-control" placeholder="Brand Name" aria-describedby="basic-addon1" value=<% out.print(brandsRank.get(i-1).getBrand_name()); %>>
+			      					</td>      					
+			      					<td><% out.print(String.format("%.2f", brandsRank.get(i-1).getReview_star())); %></td>
+			      					<td><% out.print(brandsRank.get(i-1).getReview_count()); %></td>
+			      					<td>
+			      						<button type="button" class="btn btn-secondary" onclick="location.href='brand_delete_action.jsp?brand_name=<%out.print(brandsRank.get(i-1).getBrand_name());%>'">삭제</button>
+			      					</td>
+			    				</tr>  							
+  							<% 							
+  						}
+  					
+  					%>
+  				
+					<form action="brand_add_action.jsp?brand_id=<%= i %>" method="post">
+	    				<tr class="table-active">
+	      					<th scope="row"><% out.print(i); %></th>
+	      					<td>
+			     				<input type="text" class="form-control" placeholder="Brand Name" aria-describedby="basic-addon1" name="brand_name">
+	      					</td>      					
+	      					<td></td>
+	      					<td></td>
+	      					<td>
+	      						<input type="submit" class="btn btn-secondary" value="추가"/>
+	      					</td>
+	    				</tr>
+    				</form>
     				
   				</tbody>
 			</table>

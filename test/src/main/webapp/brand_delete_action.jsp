@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="menu.*" %>
+<%@ page import="brand.*" %>
 <%@ page import="java.io.PrintWriter" %>
 
 <!DOCTYPE html>
@@ -11,10 +11,9 @@
 <body>
 
 <%
-		MenuDAO menu = new MenuDAO();
-		String button_name = request.getParameter("menu_id");
-		int menu_id = Integer.parseInt(button_name);
-		int result = menu.delete_menu(menu_id);
+		BrandDAO brand = new BrandDAO();
+		String brand_name = request.getParameter("brand_name");		
+		int result = brand.delete_brand(brand_name);
 		PrintWriter script = response.getWriter();
 		
 		if(result == -1){
@@ -25,7 +24,7 @@
 		} else if (result == 1) {
 			script.println("<script>");
 			//script.println("alert('성공적으로 삭제했습니다.')");
-			script.println("location.href = './Brand_Burger_Manage.jsp'");
+			script.println("location.href = './Brand_Manage.jsp'");
 			script.println("</script>");
 		}
 		
