@@ -38,7 +38,7 @@
 		if (result == 1){
 			script.println("<script>");
 			script.println("alert('리뷰 추가에 성공했습니다.')");
-			script.println("location.href = './review_writing.jsp'");
+			script.println("location.href = './review_writing.jsp?user_id=" + user_id + "'");
 			script.println("</script>");
 		}else if (result == -1){
 			script.println("<script>");

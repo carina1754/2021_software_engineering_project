@@ -85,24 +85,27 @@
             	BrandDAO br = new BrandDAO();
 				MenuDAO mn = new MenuDAO();
             	int num_menu = mn.get_menu_count();
+            	
+            	String user_id = request.getParameter("user");
+            	String user_state = request.getParameter("state");
              %>
             
             <span style="font-size:3em">
             	버거 순위
             </span>
             
-            <!--  <%
-            	String user_id = request.getParameter("user_id");
-            	if (user_id == "root"){
+            <%
+            	
+            	if (user_state.compareTo("2") == 0){
             		%>
 	            		<div align="right">
-	            			<button type="button" class="btn btn-primary btn-lg" id="save" onclick="location.href='burger_delete_action.jsp'">메뉴 관리</button>
+	            			<button type="button" class="btn btn-primary btn-lg" id="save" onclick="location.href='Brand_Burger_Manage.jsp?user=<%= user_id %>&state=<%= user_state %>'">메뉴 관리</button>
 	            		</div>
             		
             		<%
             	}
             
-            %> -->            
+            %>
             
             <table class="table table-hover">
   				<thead>

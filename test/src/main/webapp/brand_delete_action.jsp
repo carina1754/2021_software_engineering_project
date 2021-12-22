@@ -11,6 +11,9 @@
 <body>
 
 <%
+
+		String user_id = request.getParameter("user");
+		String user_state = request.getParameter("state");
 		BrandDAO brand = new BrandDAO();
 		String brand_name = request.getParameter("brand_name");		
 		int result = brand.delete_brand(brand_name);
@@ -23,8 +26,8 @@
 			script.println("</script>");
 		} else if (result == 1) {
 			script.println("<script>");
-			//script.println("alert('성공적으로 삭제했습니다.')");
-			script.println("location.href = './Brand_Manage.jsp'");
+			script.println("alert('성공적으로 삭제했습니다.')");
+			script.println("location.href = './Brand_Manage.jsp?user=" + user_id + "&state=" + user_state + "'");
 			script.println("</script>");
 		}
 		

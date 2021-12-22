@@ -6,6 +6,9 @@
 <%
 	BrandDAO brand_dao = new BrandDAO();
 	ArrayList<BrandRank> brandsRank = brand_dao.getBrandsRank();
+	
+	String user_id = request.getParameter("user");
+	String user_state = request.getParameter("state");
 
 %>
 
@@ -89,10 +92,20 @@
             	브랜드 순위
             </span>
             
-            <div align="right">
-            	<button type="button" class="btn btn-primary btn-lg" id="save" onclick="">브랜드 관리</button>
-            </div>
+            <%
+            	
+            	if (user_state.compareTo("2") == 0){
+            		%>
+	            		<div align="right">
+	            			<button type="button" class="btn btn-primary btn-lg" id="save" onclick="location.href='Brand_Manage.jsp?user=<%= user_id %>&state=<%= user_state %>'">브랜드 관리</button>
+	            		</div>
+            		
+            		<%
+            	}
             
+            %>
+            
+
             <table class="table table-hover">
   				<thead>
     				<tr>

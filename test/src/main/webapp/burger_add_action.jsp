@@ -11,6 +11,10 @@
 <body>
 
 <%
+		String user_id = request.getParameter("user");
+		String user_state = request.getParameter("state");
+
+
 		int menu_id = Integer.parseInt(request.getParameter("menu_id"));
 		String menu_name = request.getParameter("menu_name");
 		if (menu_name != null) menu_name = new String(menu_name.getBytes("8859_1"), "UTF-8");
@@ -23,8 +27,8 @@
 		
 		if (result == 1){
 			script.println("<script>");
-			//script.println("alert('성공적으로 삭제했습니다.')");
-			script.println("location.href = './Brand_Burger_Manage.jsp'");
+			script.println("alert('성공적으로 추가했습니다.')");
+			script.println("location.href = './Brand_Burger_Manage.jsp?user=" + user_id + "&state=" + user_state + "'");
 			script.println("</script>");
 		}else if (result == -1){
 			script.println("<script>");

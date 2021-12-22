@@ -4,6 +4,12 @@
 <%@ page import="brand.*" %>
 <%@ page import="java.util.*" %>
 
+<%
+	String user_id = request.getParameter("user");
+	String user_state = request.getParameter("state");
+
+%>
+
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -92,7 +98,7 @@
             </span>
             
             <div align="right">
-            	<button type="button" class="btn btn-primary btn-lg" id="save" onclick="">저장</button>
+            	<button type="button" class="btn btn-primary btn-lg" id="save" onclick="location.href='Burger_Rank.jsp?user=<%= user_id %>&state=<%= user_state %>'">저장</button>
             </div>
             
             <table class="table table-hover">
@@ -126,14 +132,14 @@
 	      					<td><% out.println(String.format("%.2f", rv.get_review_average(ranking.get(i-1)))); %></td>
 	      					<td><% out.println(rv.get_review_count(ranking.get(i-1))); %></td>
 	      					<td>
-	      						<button name="<% out.print(ranking.get(i-1)); %>" type="button" class="btn btn-secondary" onclick="location.href='burger_delete_action.jsp?menu_id=<%out.print(ranking.get(i-1));%>'">삭제</button>
+	      						<button name="<% out.print(ranking.get(i-1)); %>" type="button" class="btn btn-secondary" onclick="location.href='burger_delete_action.jsp?menu_id=<%out.print(ranking.get(i-1));%>&user=<%= user_id %>&state=<%= user_state %>'">삭제</button>
 	      					</td>
     					</tr>
   						<%
   					}
   				%>
   				
-  					<form action="burger_add_action.jsp?menu_id=<%= i %>" method="post">
+  					<form action="burger_add_action.jsp?menu_id=<%= i %>&user=<%= user_id %>&state=<%= user_state %>" method="post">
     					<tr class="table-active">
 	    					<th scope="row">
 	    						<% out.println(i); %>

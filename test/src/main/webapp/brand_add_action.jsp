@@ -11,6 +11,9 @@
 <body>
 
 <%
+
+		String user_id = request.getParameter("user");
+		String user_state = request.getParameter("state");
 		String brand_name = request.getParameter("brand_name");
 		if (brand_name != null) brand_name = new String(brand_name.getBytes("8859_1"), "UTF-8");
 		int brand_id = Integer.parseInt(request.getParameter("brand_id"));
@@ -22,7 +25,7 @@
 		
 		if (result == 1){
 			script.println("<script>");
-			script.println("location.href = './Brand_Manage.jsp'");
+			script.println("location.href = './Brand_Manage.jsp?user=" + user_id + "&state=" + user_state + "'");
 			script.println("</script>");
 		}else if (result == -1){
 			script.println("<script>");

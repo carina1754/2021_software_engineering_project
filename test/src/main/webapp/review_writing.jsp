@@ -14,7 +14,8 @@
 	ArrayList<String> brands = brand_dao.get_brands_name();
 	int num_brands = brands.size();
 
-	String user_id = request.getParameter("user_id");
+	String user_id = request.getParameter("user");
+	String user_state = request.getParameter("state");
 	
 	boolean admin = false;
 	if(user_id == "root"){
@@ -171,13 +172,14 @@
 							<script>
 							    document.addEventListener("DOMContentLoaded", function() {//slider의 실시간 데이터를 가져와서 숫자를 표시해주는 함수
 							        document.getElementById('range').onchange = function () {
-							            document.getElementById('rangeValue').value = (this.value/20).toFixed(1) +" 점"
+							            
 							            document.getElementById('inputValue').value = (this.value/20).toFixed(1) +" 점"
+							            
 							        }
 							    });
 							</script>
 					      <div class="form-group">					      
-						      <p id='rangeValue'><input id='inputValue' type='text' name='review_star' value='2.5 점' readonly></p>
+						      <input id='inputValue' type='text' name='review_star' value='2.5 점' readonly>
 						      
 						      <input type="range" id="range" class="custom-range">
 					      </div>
@@ -188,7 +190,7 @@
 	                <div style="float:right;"><h4>           </h4></div>
 	                <div style="float:right;"><h4>작성자:	<% out.print(user_id + '\t'); %></h4></div>
 	                
-	                <textarea name='review_info' data-min-height="150" class="form-control col-sm-5" rows="5" style="border: none">리뷰를 작성해주세요</textarea>                
+	                <textarea name='review_info' data-min-height="150" class="form-control col-sm-5" rows="10" style="border: none">리뷰를 작성해주세요</textarea>                
 	            </div>
 	            
 	            <p style="height:50px"></p>
@@ -205,7 +207,7 @@
             
             <div class="container">
                 <a href="#"><h3>About</h3></a>
-                <textarea class="form-control col-sm-5" rows="5" style="border: none">About 4조</textarea>
+                <textarea class="form-control col-sm-5" rows="5" style="border: none" readonly>About 4조</textarea>
                 
             </div>
             

@@ -6,6 +6,9 @@
 <%
 	BrandDAO brand_dao = new BrandDAO();
 	ArrayList<BrandRank> brandsRank = brand_dao.getBrandsRank();
+	
+	String user_id = request.getParameter("user");
+	String user_state = request.getParameter("state");
 
 %>
 
@@ -90,7 +93,7 @@
             </span>
             
             <div align="right">
-            	<button type="button" class="btn btn-primary btn-lg" id="save" onclick="">저장</button>
+            	<button type="button" class="btn btn-primary btn-lg" id="save" onclick="location.href='Brand_Rank.jsp?user=<%= user_id %>&state=<%= user_state %>'">저장</button>
             </div>
             
             <table class="table table-hover">
@@ -118,7 +121,7 @@
 			      					<td><% out.print(String.format("%.2f", brandsRank.get(i-1).getReview_star())); %></td>
 			      					<td><% out.print(brandsRank.get(i-1).getReview_count()); %></td>
 			      					<td>
-			      						<button type="button" class="btn btn-secondary" onclick="location.href='brand_delete_action.jsp?brand_name=<%out.print(brandsRank.get(i-1).getBrand_name());%>'">삭제</button>
+			      						<button type="button" class="btn btn-secondary" onclick="location.href='brand_delete_action.jsp?brand_name=<%out.print(brandsRank.get(i-1).getBrand_name());%>&user=<%= user_id %>&state=<%= user_state %>'">삭제</button>
 			      					</td>
 			    				</tr>  							
   							<% 							
@@ -126,7 +129,7 @@
   					
   					%>
   				
-					<form action="brand_add_action.jsp?brand_id=<%= i %>" method="post">
+					<form action="brand_add_action.jsp?brand_id=<%= i %>&user=<%= user_id %>&state=<%= user_state %>" method="post">
 	    				<tr class="table-active">
 	      					<th scope="row"><% out.print(i); %></th>
 	      					<td>
