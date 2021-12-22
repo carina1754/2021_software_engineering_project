@@ -1,17 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 <%@page import="java.util.*, java.text.*" %>
 <%@ page import="review.*" %>
 <%@ page import="subscribe.*" %>
 <%
-//String user_id = request.getParameter("name");
-String user_id = "hoyeong";
+String user_id = request.getParameter("name");
+String user_state = request.getParameter("state");
 ReviewDAO reviewDAO = new ReviewDAO();
 ArrayList<Review> reviews = reviewDAO.getUserReviews(user_id);
 
 SubscribeDAO subscribeDAO = new SubscribeDAO();
 ArrayList<UserSubscribe> subscribes = subscribeDAO.getSubscribe(user_id);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -31,7 +32,7 @@ ArrayList<UserSubscribe> subscribes = subscribeDAO.getSubscribe(user_id);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>¸¶ÀÌÆäÀÌÁö</title>
+    <title>ë§ˆì´í˜ì´ì§€</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -48,13 +49,13 @@ ArrayList<UserSubscribe> subscribes = subscribeDAO.getSubscribe(user_id);
 		    <!-- Main Content -->
 			<div id="content">
 				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-					<span style="font-size:32px;" >ÇÜ¹ö°Å ¸®ºä Á¶È¸</span>
+					<span style="font-size:32px;" >í–„ë²„ê±° ë¦¬ë·° ì¡°íšŒ</span>
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item dropdown no-arrow">
-							<a href="#">·Î±×¾Æ¿ô</a>
+							<a href="main.jsp">ë¡œê·¸ì•„ì›ƒ</a>
 						</li>
 						<li class="nav-item dropdown no-arrow">
-							<a href="#">¸¶ÀÌÆäÀÌÁö</a>
+							<a href="mypage.jsp?name=<%=user_id%>">ë§ˆì´í˜ì´ì§€</a>
 						</li>
 					</ul>					
 				</nav>
@@ -64,33 +65,33 @@ ArrayList<UserSubscribe> subscribes = subscribeDAO.getSubscribe(user_id);
                     <br>
                     <br>
                     <br>
-	               	<span style="margin-top:20px;font-size:18px;" >¸®ºä °³¼ö : <%=Integer.toString(reviewDAO.get_user_review_count(user_id)) %></span>
+	               	<span style="margin-top:20px;font-size:18px;" >ë¦¬ë·° ê°œìˆ˜ : <%=Integer.toString(reviewDAO.get_user_review_count(user_id)) %></span>
 	               	<br>
-	               	<span style="margin-top:20px;font-size:18px;" >Æò±Õ ÆòÁ¡ : <%=Float.toString(reviewDAO.get_user_review_average(user_id)) %></span>
+	               	<span style="margin-top:20px;font-size:18px;" >í‰ê·  í‰ì  : <%=Float.toString(reviewDAO.get_user_review_average(user_id)) %></span>
 	             	<br>
-	             	<span style="margin-top:20px;font-size:18px;" >±¸µ¶ÀÚ : <%=Integer.toString(subscribeDAO.get_user_subscribe_count(user_id)) %>¸í</span>
+	             	<span style="margin-top:20px;font-size:18px;" >êµ¬ë…ì : <%=Integer.toString(subscribeDAO.get_user_subscribe_count(user_id)) %>ëª…</span>
 	             	<br>
-                	<button style="margin-top:25px;"> °³ÀÎÁ¤º¸ °ü¸®</button>
+                	<button style="margin-top:25px;"> ê°œì¸ì •ë³´ ê´€ë¦¬</button>
                 </div>
-                <button> °ü¸®ÀÚ ¸Ş´º</button>
+                <button> ê´€ë¦¬ì ë©”ë‰´</button>
                 <div class="tables">
                 <table class="table">
 				  <thead class="thead-light">
 				    <tr>
-				      <th >¹ö°Å ¸Ş´º</th>
-				      <th >¸®ºä ³»¿ë</th>
-				      <th >ÆòÁ¡</th>
+				      <th >ë²„ê±° ë©”ë‰´</th>
+				      <th >ë¦¬ë·° ë‚´ìš©</th>
+				      <th >í‰ì </th>
 				      <th></th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <%for (int i=0; i<reviews.size()-1;i++) {
+				    <%for (int i=0; i<reviews.size();i++) {
 				    %>
                       <tr>
                         <td><%=reviews.get(i).get_menu_id() %></td>
                         <td><%=reviews.get(i).get_review_info() %></td>
                         <td><%=reviews.get(i).get_review_star() %></td>
-                        <td><input type="button" value="»èÁ¦ ÇÏ±â" onclick="location.href='mypage_action.jsp?name=<%=reviews.get(i).get_review_id()%>'"></td>
+                        <td><input type="button" value="ì‚­ì œ í•˜ê¸°" onclick="location.href='mypage_action.jsp?name=<%=reviews.get(i).get_review_id()%>&user=<%=user_id%>&state=<%=user_state%>'"></td>
                         </tr>
                      <%} %>
 				  </tbody>
@@ -100,10 +101,10 @@ ArrayList<UserSubscribe> subscribes = subscribeDAO.getSubscribe(user_id);
                 <table class="table">
 				  <thead class="thead-light">
 				    <tr>
-				      <th>À¯Àú¸í</th>
-				      <th>±¸µ¶ÀÚ ¼ö</th>
-				      <th>¸®ºä °³¼ö</th>
-				      <th>Æò±Õ ÆòÁ¡</th>
+				      <th>ìœ ì €ëª…</th>
+				      <th>êµ¬ë…ì ìˆ˜</th>
+				      <th>ë¦¬ë·° ê°œìˆ˜</th>
+				      <th>í‰ê·  í‰ì </th>
 				      <th></th>
 				    </tr>
 				  </thead>
@@ -115,7 +116,7 @@ ArrayList<UserSubscribe> subscribes = subscribeDAO.getSubscribe(user_id);
                         <td><%=subscribes.get(i).getsubscribe_count() %></td>
                         <td><%=subscribes.get(i).getsubscribe_star() %></td>
                         <td><%=subscribes.get(i).getuser_review_average() %></td>
-                        <td><input type="button" value="±¸µ¶ Ãë¼Ò" onclick="location.href='mypage_sub_action.jsp?name=<%=subscribes.get(i).getsubscribe_id()%>'"></td>
+                        <td><input type="button" value="êµ¬ë… ì·¨ì†Œ" onclick="location.href='mypage_sub_action.jsp?name=<%=subscribes.get(i).get_subscribe_id()%>&user=<%=user_id%>&state=<%=user_state%>'"></td>
                         </tr>
                      <%} %>
 				  </tbody>

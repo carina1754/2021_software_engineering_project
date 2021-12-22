@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="user.*" %>
 <%@ page import="java.io.PrintWriter" %> 
 
@@ -15,6 +16,7 @@
 				user.setuserpw (request.getParameter("pw"));
 				user.setuseremail(request.getParameter("email"));
 				user.setuserphone(request.getParameter("phone"));
+				user.setuserstate("0");
 				UserDAO userData = new UserDAO();//레지스터 객체 생성
 				int result = userData.join(user);//회원가입 결과 출력 변수
 				PrintWriter script = response.getWriter();
