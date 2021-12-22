@@ -13,6 +13,10 @@ Review review = reviewDAO.getReview(review_id);
 MenuDAO menuDAO = new MenuDAO();
 String menu_name = menuDAO.get_menu_name(Integer.parseInt(review.get_menu_id()));
 
+String user_id = "jihoon";
+int like = 1;
+int hate = 2;
+
 ArrayList<Review> userReview = reviewDAO.getUserReviews(review.get_user_id());
 
 double avg = 0.0;
@@ -103,15 +107,25 @@ User user = userDAO.getUser(review.get_user_id());
             
             <p style="height:50px"></p>
 
+			<%if(user_id.compareTo(review.get_user_id())!=0){ %>
             <div align="right">
-                <button type="button" class="btn btn-default" id="like" onclick="location.href='like_action.jsp?review_id=<%=review_id%>'">좋아요</button>
-                <button type="button" class="btn btn-default" id="hate" onclick="location.href='hate_action.jsp?review_id=<%=review_id%>'">싫어요</button>
+                <button type="button" class="btn btn-default" id="like" onclick="location.href='feeling_action.jsp?review_id=<%=review_id%>&user_id=<%=user_id%>&feeling_state=<%=like%>'">좋아요</button>
+                <button type="button" class="btn btn-default" id="hate" onclick="location.href='feeling_action.jsp?review_id=<%=review_id%>&user_id=<%=user_id%>&feeling_state=<%=hate%>'">싫어요</button>
             </div>
+            <% }%>
             <p style="height:5px"></p>
+            
+            <%if(user_id.compareTo(review.get_user_id())==0){%>
             <div align="right">
-                <button type="button" class="btn btn-primary" id="ad_del" onclick="location.href='review_del_act.jsp?review_id=<%=review_id%>'">삭제하기</button>
                 <button type="button" class="btn btn-secondary" id="user_del" onclick="location.href='review_del_act.jsp?review_id=<%=review_id%>'">삭제하기</button>
             </div>
+            <%}
+            else if(user.getState().compareTo("0")==0){%>
+            <div align="right">
+                <button type="button" class="btn btn-primary" id="ad_del" onclick="location.href='review_del_act.jsp?review_id=<%=review_id%>'">삭제하기</button>
+            </div>
+            <%}%>
+
 
             <p style="height:100px"></p>
             
