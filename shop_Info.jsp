@@ -6,6 +6,7 @@
 <%@ page import ="menu.*" %>
 <%@ page import ="java.io.PrintWriter" %>
 <%@ page import = "java.sql.SQLException" %>
+<%@ page import="java.util.*" %>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -44,7 +45,7 @@
                        <div class="row" align="center">
                 <div class="col-md-4">
 
-                    <img src="1.png" align="middle" vspace="30" hspace="50">
+                    <img src="./1.png" align="middle" vspace="30" hspace="50">
                      고기를 팬에 굽는 일반 QSR과는 달리, 버거킹은 고기를 직접 불에 구워 조리하는 직화 방식으로 담백하고 풍부한 맛과 향, 그리고 정통 햄버거의 풍미를 선보이고 있습니다.<br>
                       
                    
@@ -58,24 +59,66 @@
                 </div>
                </div>
             
-           
-        <a><h1>BurgerKing의 인기 버거</h1></a>
+            
+            
+                <%
         
-         <button type="button" class="btn btn-info" id="mypage" onclick="location.href='menu_admin.jsp'" style="float:right">메뉴 관리</button>
+           int brand_id = Integer.parseInt(request.getParameter("brand_id"));
+           MenuDAO mn_dao = new MenuDAO();
+           ArrayList<String> burgers = mn_dao.get_brand_burgers_name(brand_id);           
+
+        
+        %>    
+        
+           
+        <a><h1> 인기 버거</h1></a>
+        
+        
+        <button type="button" class="btn btn-info" id="mypage" onclick="location.href='menu_admin.jsp'" style="float:right">메뉴 관리</button>
         <div class="row" align="center">
-                <div class="col-md-4">
+        
+           <%
+              int num=4;
+              if(burgers.size() < 4) num = burgers.size();
+              for (int i = 0; i < num; i++){
+              %>
+                 
+               <img src="./1.png" style="vertical-align:top;" width="200" height="200">
+                 <% out.print(burgers.get(i)); %> <br>
+                 맛 설명~~~ <br>
+              
+              
+              <%
+              
+              }
+        
+        
+        
+           %>
+       
+        
+        </div>
+        
+        
+        
+        
+        
+         <!-- 
+        <div class="row" align="center">
+		<img src="./1.png" style="vertical-align:top;" width="200" height="200">
+                     불고기 버거 <br>
+                     맛이 있습니다.<br>
                     <img src="./1.png" style="vertical-align:top;" width="200" height="200">
-                    <div class="row" align="center">
-                <div class="col-md-4">
+                    불고기 버거 <br>
+                    그럭저럭... <br>
                     <img src="./1.png" style="vertical-align:top;" width="200" height="200">
-                    <div class="row" align="center">
-                <div class="col-md-4">
-                    <img src="./1.png" style="vertical-align:top;" width="200" height="200">
+                    불고기 버거 <br>
+                    다시는 안 먹을 것 같아요.<br>
+                    
                   </div>
                   </div>
-                  </div>
-                  </div>
-                  </div>
+               -->    
+                
                   
                 <div class = "row">
                 <div align="right">
@@ -158,7 +201,7 @@
                     
                     <hr/>
                     
-                    <a class = "btn btn-default pull-right">글쓰기</a>
+                    
                     
                     <div class = "text-center">
                        <ul class = "pagination">
