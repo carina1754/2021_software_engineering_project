@@ -1,16 +1,17 @@
 package subscribe;
 
 public class UserSubscribe {
-	private int subscribe_id = 0;
+	private String subscribe_id = "0";
 	private String subscribe_name="";
 	private int subscribe_count=0;
 	private int subscribe_star=0;
 	private float user_review_average=0;
-	public int getsubscribe_id() {
+	
+	public String get_subscribe_id() {
 		return subscribe_id;
 	}
-	public int setsubscribe_id(int subscribe_id) {
-		return subscribe_id;
+	public void set_subscribe_id(String subscribe_id) {
+		this.subscribe_id =  subscribe_id;
 	}
 	public String getsubscribe_name() {
 		return subscribe_name;
@@ -38,6 +39,7 @@ public class UserSubscribe {
 	}
 	public String getjsonFormat() {
 		return "subscribe_name : "+subscribe_name+"\n"+
+				"subscribe_id : "+subscribe_id+"\n"+
 				"subscribe_count : "+subscribe_count+"\n"+
 				"subscribe_star : "+subscribe_star+"\n"+
 				"user_review_average : "+user_review_average;

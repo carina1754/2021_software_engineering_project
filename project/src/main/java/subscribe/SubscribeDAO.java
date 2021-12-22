@@ -61,8 +61,8 @@ public class SubscribeDAO {
 	        while(rs.next()){
 				
 				UserSubscribe UserSubscribe = new UserSubscribe();
-				
-				UserSubscribe.setsubscribe_id(rs.getInt("subscribe_id"));
+				System.out.println(rs.getString("subscribe_id"));
+				UserSubscribe.set_subscribe_id(rs.getString("subscribe_id"));
 				UserSubscribe.setsubscribe_name(rs.getString("subscribe_name"));
 				UserSubscribe.setsubscribe_star(rs.getInt("review_star"));
 				UserSubscribe.set_user_review_average(rs.getFloat("review_avg"));
@@ -72,7 +72,7 @@ public class SubscribeDAO {
 			}
 			int idx=0;
 			while(idx < Usersubscribe.size()) {
-				System.out.println(idx+" 번지 결과 : " + Usersubscribe.get(idx).getjsonFormat());
+				System.out.println(idx+" 踰덉� 寃곌낵 : " + Usersubscribe.get(idx).getjsonFormat());
 				idx ++;
 			}
 			rs.close();
@@ -86,7 +86,7 @@ public class SubscribeDAO {
 			String dbPwd = "123123";
 			Class.forName("org.mariadb.jdbc.Driver");
 			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
-			PreparedStatement pst = con.prepareStatement("delete FROM subscribe where subscribe_id = ?");
+			PreparedStatement pst = con.prepareStatement("delete FROM ` subscribe` where subscribe_id = ?");
 			pst.setString(1, subscribe_id);
 			rs = pst.executeQuery();
 			rs.close();

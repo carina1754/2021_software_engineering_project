@@ -49,7 +49,7 @@ public class ReviewDAO {
 			return Integer.parseInt(rs.getString(1));
 			
 			
-		} catch (Exception e) { e.printStackTrace(); return -1; }
+		} catch (Exception e) { e.printStackTrace(); return 0; }
 			
 	}
 	public int get_user_review_count(String user_id) {
@@ -68,7 +68,7 @@ public class ReviewDAO {
 			return Integer.parseInt(rs.getString(1));
 			
 			
-		} catch (Exception e) { e.printStackTrace(); return -1; }
+		} catch (Exception e) { e.printStackTrace(); return 0; }
 			
 	}
 	public float get_user_review_average(String user_id) {
@@ -82,9 +82,11 @@ public class ReviewDAO {
 			pst.setString(1, user_id);
 			rs = pst.executeQuery();
 			rs.next();
-			
-			
-			return Float.parseFloat(rs.getString(1));
+			if (Float.parseFloat(rs.getString(1)) == -1.0) {
+				return 0;
+			}
+			else
+				return Float.parseFloat(rs.getString(1));
 			
 			
 		} catch (Exception e) { e.printStackTrace(); return -1; }
@@ -165,7 +167,7 @@ public class ReviewDAO {
 			String dbPwd = "123123";
 			Class.forName("org.mariadb.jdbc.Driver");
 			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
-			PreparedStatement pst = con.prepareStatement("SELECT M.menu_name as menu_name,R.review_star as review_star,R.review_info as review_info "
+			PreparedStatement pst = con.prepareStatement("SELECT R.review_id as review_id, M.menu_name as menu_name,R.review_star as review_star,R.review_info as review_info "
 					+ "from  review AS R INNER JOIN menu AS M "
 					+ "where R.user_id = ? "
 					+ "and M.menu_id = R.menu_id");
@@ -176,7 +178,7 @@ public class ReviewDAO {
 
 			while(rs.next()){
 				Review reviewDAO = new Review();
-				
+				reviewDAO.set_review_id(rs.getString("review_id"));
 	        	reviewDAO.set_menu_id(rs.getString("menu_name"));
 	        	reviewDAO.set_review_star(rs.getString("review_star"));
 	        	reviewDAO.set_review_info(rs.getString("review_info"));
@@ -188,7 +190,7 @@ public class ReviewDAO {
 			rs.close();
 //			int idx=0;
 //			while(idx < UserReviews.size()) {
-//				System.out.println(idx+" 번지 결과 : " + UserReviews.get(idx).getjsonFormat());
+//				System.out.println(idx+" 踰덉� 寃곌낵 : " + UserReviews.get(idx).getjsonFormat());
 //				idx ++;
 //			}
 			return UserReviews;

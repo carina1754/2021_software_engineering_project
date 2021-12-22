@@ -5,7 +5,7 @@ public class User {
 	private String pw="";
 	private String email="";
 	private String phone="";
-	
+	private String state="";
 	public String getuserid() {
 		return id;
 	}
@@ -29,5 +29,11 @@ public class User {
 	}
 	public void setuserphone(String phone) {
 		this.phone = phone;
+	}
+	public String getuserstate() {
+		return state;
+	}
+	public void setuserstate(String state) {
+		this.state = state;
 	}
 }
