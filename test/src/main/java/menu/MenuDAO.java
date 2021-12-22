@@ -215,6 +215,33 @@ public class MenuDAO {
 		} catch (Exception e) { e.printStackTrace(); return null; }
 	}
 	
+	public ArrayList<String> get_brand_burgers_rank(int brand_id) {
+		try {
+			String dbURL = "jdbc:mysql://222.113.57.39:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
+			String dbID = "swe4";
+			String dbPwd = "123123";
+			Class.forName("org.mariadb.jdbc.Driver");
+			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
+			PreparedStatement pst = con.prepareStatement("SELECT T.menu_id, AVG(T.review_star) AS review_star_avg from"
+					+ "(SELECT M.menu_id, M.brand_id, R.review_star  from menu M LEFT JOIN review R ON M.menu_id = R.menu_id WHERE brand_id = ?) AS T"
+					+ "GROUP BY T.menu_id ORDER BY review_star_avg DESC;");
+			pst.setString(1, Integer.toString(brand_id));
+			
+			rs = pst.executeQuery();
+			
+			ArrayList<String> menus = new ArrayList<String>();
+			while(rs.next()) {
+				menus.add(rs.getString(1));
+			}
+						
+			rs.close();
+			
+			return menus;
+			
+			
+		} catch (Exception e) { e.printStackTrace(); return null; }
+	}
+	
 	
 	
 }

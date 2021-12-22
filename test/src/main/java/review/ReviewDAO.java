@@ -53,20 +53,32 @@ public class ReviewDAO {
 			
 	}
 	
-	public int get_total_review_count() {
+	public int get_review_index() {
 		try {
 			String dbURL = "jdbc:mysql://222.113.57.39:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
 			String dbID = "swe4";
 			String dbPwd = "123123";
 			Class.forName("org.mariadb.jdbc.Driver");
 			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
-			PreparedStatement pst = con.prepareStatement("SELECT COUNT(review_id) FROM review");
 			
+			PreparedStatement pst = con.prepareStatement("select max(length(review_id)) from review");
+			rs = pst.executeQuery();
+			rs.next();
+			String max_length = rs.getString(1);
+			
+			pst = con.prepareStatement("select max(review_id) from review where length(review_id) = ?");
+			pst.setString(1, max_length);
 			rs = pst.executeQuery();
 			rs.next();
 			
 			
-			return Integer.parseInt(rs.getString(1));
+			//PreparedStatement pst = con.prepareStatement("SELECT MAX(review_id) from review where length(review_id) = (select max(length(review_id)) from review");
+			
+			//rs = pst.executeQuery();
+			//rs.next();
+			
+			
+			return Integer.parseInt(rs.getString(1)) + 1;
 			
 			
 		} catch (Exception e) { e.printStackTrace(); return -1; }
@@ -105,7 +117,7 @@ public class ReviewDAO {
 			Class.forName("org.mariadb.jdbc.Driver");
 			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
 			PreparedStatement pst = con.prepareStatement("INSERT INTO review(review_id, menu_id, user_id, review_date, review_star, review_info) VALUES (?, ?, ?, ?, ?, ?)");
-			int review_id = this.get_total_review_count() + 1;
+			int review_id = this.get_review_index();
 			
 			SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
 			String today = simpleDate.format(new java.util.Date());

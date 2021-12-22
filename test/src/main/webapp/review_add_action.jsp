@@ -13,8 +13,9 @@
 <body>
 
 <%
-		String user_id = request.getParameter("user_id");
+		String user_id = request.getParameter("user");
 		String menu_id = request.getParameter("burger");
+		String user_state = request.getParameter("state");
 		
 		String review_star_str = request.getParameter("review_star");
 		
@@ -38,7 +39,7 @@
 		if (result == 1){
 			script.println("<script>");
 			script.println("alert('리뷰 추가에 성공했습니다.')");
-			script.println("location.href = './review_writing.jsp?user_id=" + user_id + "'");
+			script.println("location.href = './review_writing.jsp?user=" + user_id + "&state=" + user_state + "'");
 			script.println("</script>");
 		}else if (result == -1){
 			script.println("<script>");

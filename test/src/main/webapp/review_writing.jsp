@@ -137,7 +137,7 @@
         </script>
         
         
-        <form action="review_add_action.jsp?user_id=<%= user_id %>" method="post">
+        <form action="review_add_action.jsp?user=<%= user_id %>&state=<%= user_state %>" method="post">
         
         	<select name="brand" id="brand">
         		<%
