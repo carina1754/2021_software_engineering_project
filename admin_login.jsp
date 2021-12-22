@@ -132,9 +132,9 @@
 	      					<td><% out.println(rv.get_review_count(ranking.get(i-1))); %></td>
 	      					<td><% out.println(rv.get_review_average(ranking.get(i-1))); %></td>
 	      					<td><% out.println(rv.get_review_dislike(ranking.get(i-1))); %></td>
-	      					<td></td>
+	      					<td><% out.println(rv.get_review_percent(ranking.get(i))); %></td>
 	      					<td><select id="use" name="use" size="1">
-			<option value="">선택하세요.</option>
+
 			<option value="활성">활성</option>
 			<option value="이용 정지">이용 정지</option>
 		
@@ -209,7 +209,6 @@
     </body>
 </html>
 
- 
         
         
 
