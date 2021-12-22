@@ -32,6 +32,30 @@ public class BrandDAO {
 		} catch (Exception e) { e.printStackTrace(); return ""; }
 	}
 	
+	public ArrayList<String> get_brands_name() {
+		try {
+			String dbURL = "jdbc:mysql://222.113.57.39:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
+			String dbID = "swe4";
+			String dbPwd = "123123";
+			Class.forName("org.mariadb.jdbc.Driver");
+			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
+			PreparedStatement pst = con.prepareStatement("SELECT brand_name FROM brand");
+			
+			rs = pst.executeQuery();
+			
+			ArrayList<String> brands = new ArrayList<String>();
+			while(rs.next()) {
+				brands.add(rs.getString(1));
+			}
+						
+			rs.close();
+			
+			return brands;
+			
+			
+		} catch (Exception e) { e.printStackTrace(); return null; }
+	}
+	
 	public int get_brand_count() {
 		try {
 			String dbURL = "jdbc:mysql://222.113.57.39:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
@@ -60,7 +84,7 @@ public class BrandDAO {
 			String dbPwd = "123123";
 			Class.forName("org.mariadb.jdbc.Driver");
 			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
-			PreparedStatement pst = con.prepareStatement("SELECT brand_id FROM brand WHERE brand_id = ?");
+			PreparedStatement pst = con.prepareStatement("SELECT brand_id FROM brand WHERE brand_name = ?");
 			pst.setString(1, brand_name);
 			rs = pst.executeQuery();
 			rs.next();

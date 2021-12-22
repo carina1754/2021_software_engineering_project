@@ -72,6 +72,26 @@ public class MenuDAO {
 		} catch (Exception e) { e.printStackTrace(); return ""; }
 	}
 	
+	public int get_menu_id(String menu_name) {
+		try {
+			String dbURL = "jdbc:mysql://222.113.57.39:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
+			String dbID = "swe4";
+			String dbPwd = "123123";
+			Class.forName("org.mariadb.jdbc.Driver");
+			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
+			PreparedStatement pst = con.prepareStatement("SELECT menu_id FROM menu WHERE menu_name = ?");
+			pst.setString(1, menu_name);
+			rs = pst.executeQuery();
+			rs.next();
+			int menu_id = Integer.parseInt(rs.getString(1));
+			rs.close();
+			
+			return menu_id;
+			
+			
+		} catch (Exception e) { e.printStackTrace(); return -1; }
+	}
+	
 	public int delete_menu(int menu_id) {
 		try {
 			String dbURL = "jdbc:mysql://222.113.57.39:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
@@ -168,6 +188,31 @@ public class MenuDAO {
 			
 			
 		} catch (Exception e) { e.printStackTrace(); return -1; }		
+	}
+	
+	public ArrayList<String> get_brand_burgers_name(int brand_id) {
+		try {
+			String dbURL = "jdbc:mysql://222.113.57.39:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
+			String dbID = "swe4";
+			String dbPwd = "123123";
+			Class.forName("org.mariadb.jdbc.Driver");
+			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
+			PreparedStatement pst = con.prepareStatement("SELECT menu_name FROM menu WHERE brand_id = ?");
+			pst.setString(1, Integer.toString(brand_id));
+			
+			rs = pst.executeQuery();
+			
+			ArrayList<String> menus = new ArrayList<String>();
+			while(rs.next()) {
+				menus.add(rs.getString(1));
+			}
+						
+			rs.close();
+			
+			return menus;
+			
+			
+		} catch (Exception e) { e.printStackTrace(); return null; }
 	}
 	
 	
