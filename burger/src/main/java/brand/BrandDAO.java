@@ -25,9 +25,9 @@ public class BrandDAO {
 			Class.forName("org.mariadb.jdbc.Driver");
 			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
 			String sql ="select T.brand_id, T.brand_name, avg(T.review_star) as review_star, count(T.review_star) as review_count"
-					+ " from (select B.brand_id, B.brand_name, M.menu_id, M.menu_name, R.review_star from menu M left join brand B on B.brand_id = M.brand_id left join review R on M.menu_id = R.menu_id order by brand_id) as T"
+					+ " from (select B.brand_id, B.brand_name, M.menu_id, M.menu_name, R.review_star from brand B left join menu M on B.brand_id = M.brand_id left join review R on M.menu_id = R.menu_id order by brand_id) as T"
 					+ " group by T.brand_name"
-					+ " having review_star is not null"
+					//+ " having review_star is not null"
 					+ " order by review_star desc;";
 			
 			PreparedStatement pst = con.prepareStatement(sql);

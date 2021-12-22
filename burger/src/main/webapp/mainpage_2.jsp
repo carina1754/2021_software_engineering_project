@@ -36,7 +36,7 @@ ArrayList<BrandMenu> brandMenu_2 = menuDAO.getBrandMenu(rankedBrand_id_2);
 </head>
 
 <body class="container">
-	<a href="#"><h1>종합 버거 리뷰</h1></a>
+	<a href="mainpage_1"><h1>종합 버거 리뷰</h1></a>
 	<p style="height:20px"></p>
 
 	<!--로그인, 회원가입, 마이페이지 -->

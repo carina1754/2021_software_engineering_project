@@ -261,5 +261,52 @@ public class ReviewDAO {
 		} catch (Exception e) { e.printStackTrace(); return null; }	
 	}	
 	
+	public int review_like(String review_id) {
+		try{
+			String dbURL = "jdbc:mysql://222.113.57.39:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
+			String dbID = "swe4";
+			String dbPwd = "123123";
+			Class.forName("org.mariadb.jdbc.Driver");
+			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
+			PreparedStatement pst = con.prepareStatement("update review set review_like = review_like+ 1 where review_id = ?");
+			pst.setString(1, review_id);
+			rs = pst.executeQuery();
+			rs.close();
+			return 1;
+		} catch (Exception e) { e.printStackTrace(); return -1; }	
+		
+	}
+	
+	public int review_hate(String review_id) {
+		try{
+			String dbURL = "jdbc:mysql://222.113.57.39:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
+			String dbID = "swe4";
+			String dbPwd = "123123";
+			Class.forName("org.mariadb.jdbc.Driver");
+			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
+			PreparedStatement pst = con.prepareStatement("update review set review_like = review_like - 1 where review_id = ?");
+			pst.setString(1, review_id);
+			rs = pst.executeQuery();
+			rs.close();
+			return 1;
+		} catch (Exception e) { e.printStackTrace(); return -1; }	
+		
+	}
+	
+	public int del_review (String review_id) {
+		try{
+			String dbURL = "jdbc:mysql://222.113.57.39:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
+			String dbID = "swe4";
+			String dbPwd = "123123";
+			Class.forName("org.mariadb.jdbc.Driver");
+			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
+			PreparedStatement pst = con.prepareStatement("delete from review where review_id = ?");
+			pst.setString(1, review_id);
+			rs = pst.executeQuery();
+			rs.close();
+			return 1;
+		} catch (Exception e) { e.printStackTrace(); return -1; }	
+		
+	}
 	
 }

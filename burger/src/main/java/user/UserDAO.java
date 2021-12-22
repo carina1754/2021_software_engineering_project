@@ -76,12 +76,12 @@ public class UserDAO {
 	
 	public User getUser(String id) {
 		try { 
-			String dbURL = "jdbc:mysql://localhost:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
-			String dbID = "root";
+			String dbURL = "jdbc:mysql://222.113.57.39:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
+			String dbID = "swe4";
 			String dbPwd = "123123";
 			Class.forName("org.mariadb.jdbc.Driver");
 			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
-			PreparedStatement pst = con.prepareStatement("SELECT * FROM user user_id = ?"); 
+			PreparedStatement pst = con.prepareStatement("SELECT * FROM user where user_id = ?"); 
 			pst.setString(1, id);
 			rs = pst.executeQuery();
 			if(rs.next()) {
@@ -90,6 +90,9 @@ public class UserDAO {
 				userDAO.setuserpw(rs.getString(2));
 				userDAO.setuseremail(rs.getString(3));
 				userDAO.setuserphone(rs.getString(4));
+				userDAO.setAddress(rs.getString(5));
+				userDAO.setInfo(rs.getString(6));
+				userDAO.setState(rs.getString(7));
 				return userDAO;
 			}
 			} catch (Exception e) {
@@ -97,5 +100,6 @@ public class UserDAO {
 		}
 		return null; 
 	}
+	
 	
 }
