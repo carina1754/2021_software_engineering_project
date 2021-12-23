@@ -4,7 +4,7 @@ public class BrandRank {
 	private String brand_name="";
 	private float review_star=0;
 	private int review_count=0;
-	
+	private String brand_id = ""; 
 	
 	
 	public String getBrand_name() {
@@ -24,6 +24,12 @@ public class BrandRank {
 	}
 	public void setReview_count(int review_count) {
 		this.review_count = review_count;
+	}
+	public String getBrand_id() {
+		return brand_id;
+	}
+	public void setBrand_id(String brand_id) {
+		this.brand_id = brand_id;
 	}
 	
 }

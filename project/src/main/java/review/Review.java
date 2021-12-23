@@ -75,12 +75,11 @@ public class Review {
 		this.review_info = review_info;
 	}
 
+
 	public String getjsonFormat() {
 		return "{"+"\"menu_id\":"+menu_id+","+"\"review_star\":"+review_star+","+"\"review_info\":"+review_info+"}";
 	}
 
 
-	
-	
 	
 }

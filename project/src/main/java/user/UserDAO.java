@@ -4,13 +4,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
 
 public class UserDAO {
 	
 	private Connection con;
 	private ResultSet rs;
 	
-	// -2: id 없음 / -1: 서버 오류 / 0: 비밀번호 틀림 / 1: 성공
+	
 	public int login(String id, String pw) {
 		try {
 			String dbURL = "jdbc:mysql://222.113.57.39:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
@@ -52,7 +53,7 @@ public class UserDAO {
 		}
 	}
 	
-	// -1 : 서버 오류 / 0: 이미 존재 하는 id / 1: 성공
+	
 	public int join(User userDAO) throws ClassNotFoundException {
 		
 		if(ID_Check(userDAO.getuserid())) return 0;
@@ -98,7 +99,7 @@ public class UserDAO {
 			String dbPwd = "123123";
 			Class.forName("org.mariadb.jdbc.Driver");
 			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
-			PreparedStatement pst = con.prepareStatement("SELECT * FROM user user_id = ?"); 
+			PreparedStatement pst = con.prepareStatement("SELECT * FROM user where user_id = ?"); 
 			pst.setString(1, id);
 			rs = pst.executeQuery();
 			if(rs.next()) {
@@ -107,12 +108,60 @@ public class UserDAO {
 				userDAO.setuserpw(rs.getString(2));
 				userDAO.setuseremail(rs.getString(3));
 				userDAO.setuserphone(rs.getString(4));
+				userDAO.setInfo(rs.getString(6));
 				return userDAO;
 			}
 			} catch (Exception e) {
 				e.printStackTrace(); 
 		}
 		return null; 
+	}
+	
+	public ArrayList<User> user_list() {
+		
+		try { 
+			String dbURL = "jdbc:mysql://222.113.57.39:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
+			String dbID = "swe4";
+			String dbPwd = "123123";
+			Class.forName("org.mariadb.jdbc.Driver");
+			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
+			PreparedStatement pst = con.prepareStatement("SELECT * FROM user"); 
+			
+			rs = pst.executeQuery();
+			
+			ArrayList<User> u_list = new ArrayList<User>();
+			while(rs.next()) {
+				User user = new User();
+				user.setuserid(rs.getString(1));
+				user.setuserstate(rs.getString(7));
+				u_list.add(user);
+			}
+			return u_list;
+			
+		} catch (Exception e) { e.printStackTrace(); return null; }
+		
+				
+	}
+	
+	public int edit(User userDAO,String user_id) throws ClassNotFoundException {
+		
+		try {
+			String dbURL = "jdbc:mysql://222.113.57.39:3306/hamburger_db?characterEncoding=UTF-8&serverTimezone=UTC";
+			String dbID = "swe4";
+			String dbPwd = "123123";
+			Class.forName("org.mariadb.jdbc.Driver");
+			con = DriverManager.getConnection(dbURL,dbID,dbPwd);
+			PreparedStatement pst = con.prepareStatement("update user set user_pw = ?,user_email = ?,user_phone = ? where user_id = ?"); 
+			pst.setString(1, userDAO.getuserpw()); 
+			pst.setString(2, userDAO.getuseremail());
+			pst.setString(3, userDAO.getuserphone());
+			pst.setString(4, user_id);
+			return pst.executeUpdate(); 
+			} catch (Exception e) {
+				e.printStackTrace(); 
+		return -1; 
+		
+			}
 	}
 	
 }

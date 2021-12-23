@@ -6,6 +6,7 @@ public class User {
 	private String email="";
 	private String phone="";
 	private String state="";
+	private String info="";
 	public String getuserid() {
 		return id;
 	}
@@ -35,5 +36,11 @@ public class User {
 	}
 	public void setuserstate(String state) {
 		this.state = state;
+	}
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
 	}
 }

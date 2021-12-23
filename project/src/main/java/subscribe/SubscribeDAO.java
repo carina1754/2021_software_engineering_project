@@ -72,7 +72,7 @@ public class SubscribeDAO {
 			}
 			int idx=0;
 			while(idx < Usersubscribe.size()) {
-				System.out.println(idx+" 踰덉� 寃곌낵 : " + Usersubscribe.get(idx).getjsonFormat());
+	
 				idx ++;
 			}
 			rs.close();
