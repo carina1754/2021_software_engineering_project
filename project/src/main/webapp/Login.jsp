@@ -17,7 +17,7 @@
             <h2 style="text-align: center;">Log-in</h2>
             <div class="login_id">
                 <h4>ID</h4>
-                <input type="text" name="id" placeholder="Email">
+                <input type="text" name="id" placeholder="ID">
             </div>
             <div class="login_pw">
                 <h4>Password</h4>
@@ -27,15 +27,9 @@
             <div class="register">
                 <a href="Register.jsp">회원가입  </a>
             </div>
-                <div class="forgot_id">
-                <a href="">아이디 찾기  </a>
-            </div>
-            	<div class="forgot_pw">
-                <a href="">비밀번호 찾기</a>
-            </div>
             </div>
             <div class="submit">
-                <input type="submit" value="submit">
+                <input type="submit" value="Login">
             </div>
             </form>
         </div>

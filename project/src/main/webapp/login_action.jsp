@@ -23,7 +23,8 @@
 				}
 				else if(result == 1){//로그인 성공
 					script.println("<script>");
-					script.println("location.href = 'mypage.jsp?name="+request.getParameter("id")+"&state="+userData.get_User_state(request.getParameter("id"))+"'");
+					//script.println("location.href = 'mypage.jsp?name="+request.getParameter("id")+"&state="+userData.get_User_state(request.getParameter("id"))+"'");
+					script.println("location.href = 'mainpage_1.jsp?name="+request.getParameter("id")+"&state="+userData.get_User_state(request.getParameter("id"))+"'");
 					script.println("</script>");
 				}
 				else if(result == -1){//서버 오류

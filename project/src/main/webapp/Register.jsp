@@ -19,17 +19,17 @@
                 <h4>Password</h4>
                 <input type="password" name="pw" placeholder="Password">
             </div>
-            <div class="login_email">
+            <div class="login_pw">
                 <h4>e-mail</h4>
                 <input type="email" name="email" placeholder="Email">
             </div>
-            <div class="login_phone">
+            <div class="login_id">
                 <h4>phone</h4>
                 <input type="text" name="phone" placeholder="Phone">
             </div>
             
             <div class="submit">
-                <input type="submit" value="submit">
+                <input type="submit" value="Register">
             </div>
             </form>
         </div>
@@ -43,16 +43,13 @@
   box-sizing: border-box;
   font-family: "Noto Sans KR", sans-serif;
 }
-
 a {
   text-decoration: none;
   color: black;
 }
-
 li {
   list-style: none;
 }
-
 .wrap {
   width: 100%;
   height: 100vh;
@@ -61,9 +58,8 @@ li {
   justify-content: center;
   background: rgba(0, 0, 0, 0.1);
 }
-
 .login {
-  width: 30%;
+  width: 40%;
   height: 600px;
   background: white;
   border-radius: 20px;
@@ -72,7 +68,6 @@ li {
   align-items: center;
   flex-direction: column;
 }
-
 h2 {
   color: tomato;
   font-size: 2em;
@@ -81,11 +76,9 @@ h2 {
   padding: 20px;
   display: flex;
 }
-
 .login_sns li {
   padding: 0px 15px;
 }
-
 .login_sns a {
   width: 50px;
   height: 50px;
@@ -98,41 +91,11 @@ h2 {
   font-size: 20px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4), -3px -3px 5px rgba(0, 0, 0, 0.1);
 }
-
 .login_id {
   margin-top: 20px;
-  width: 80%;
+  width: 100%;
 }
-
 .login_id input {
-  width: 100%;
-  height: 50px;
-  border-radius: 30px;
-  margin-top: 10px;
-  padding: 0px 20px;
-  border: 1px solid lightgray;
-  outline: none;
-}
-.login_email {
-  margin-top: 20px;
-  width: 80%;
-}
-
-.login_email input {
-  width: 100%;
-  height: 50px;
-  border-radius: 30px;
-  margin-top: 10px;
-  padding: 0px 20px;
-  border: 1px solid lightgray;
-  outline: none;
-}
-.login_phone {
-  margin-top: 20px;
-  width: 80%;
-}
-
-.login_phone input {
   width: 100%;
   height: 50px;
   border-radius: 30px;
@@ -143,9 +106,8 @@ h2 {
 }
 .login_pw {
   margin-top: 20px;
-  width: 80%;
+  width: 100%;
 }
-
 .login_pw input {
   width: 100%;
   height: 50px;
@@ -155,20 +117,19 @@ h2 {
   border: 1px solid lightgray;
   outline: none;
 }
-
 .login_etc {
   padding: 10px;
-  width: 80%;
+  width: 100%;
   font-size: 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-weight: bold;
 }
-
 .submit {
   margin-top: 50px;
-  width: 80%;
+  width: 100%;
+  text-align: center;
 }
 .submit input {
   width: 100%;

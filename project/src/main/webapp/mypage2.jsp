@@ -10,8 +10,9 @@ String user_id = request.getParameter("name");
 String user_state = request.getParameter("state");
 ReviewDAO reviewDAO = new ReviewDAO();
 ArrayList<Review> reviews = reviewDAO.getUserReviews(user_id);
-UserDAO user = new UserDAO();
-User data = user.getUser(user_id);
+
+UserDAO userDAO = new UserDAO();
+User user = userDAO.getUser(user_id);
 SubscribeDAO subscribeDAO = new SubscribeDAO();
 ArrayList<UserSubscribe> subscribes = subscribeDAO.getSubscribe(user_id);
 
@@ -80,58 +81,40 @@ ArrayList<UserSubscribe> subscribes = subscribeDAO.getSubscribe(user_id);
                    <br>
                    <span style="margin-top:20px;font-size:18px;" >구독자 : <%=Integer.toString(subscribeDAO.get_user_subscribe_count(user_id)) %>명</span>
                    <br>
-                   <button style="margin-top:25px;width: 130px;height: 40px;" class="btn btn-info btn-icon-split" > 
-                   <span onclick="location.href='mypage2.jsp?name=<%=user_id%>&state=<%=user_state%>'" class="text">개인정보 관리</span>
+                </div>
+                <form method="post" action="./mypage_action3.jsp?name=<%=user_id%>&state=<%=user_state%>">
+                <textarea rows="2" name="text" ><%=user.getInfo() %></textarea>
+                 <br>
+                <button style="width: 100px;height: 40px;" type="submit" class="btn btn-info btn-icon-split" > 
+                   <span class="text">수정하기
+                 </span>
                    </button>
-                </div>
-                <div class="tables">
-                <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th >버거 메뉴</th>
-                  <th >리뷰 내용</th>
-                  <th >평점</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <%for (int i=0; i<reviews.size();i++) {
-                %>
-                      <tr>
-                        <td><%=reviews.get(i).get_menu_id() %></td>
-                        <td><%=reviews.get(i).get_review_info() %></td>
-                        <td><%=reviews.get(i).get_review_star() %></td>
-                        <td><input type="button" value="삭제 하기" onclick="location.href='mypage_action.jsp?name=<%=reviews.get(i).get_review_id()%>&user=<%=user_id%>&state=<%=user_state%>'" class="btn btn-danger btn-icon-split" style="width: 90px;height: 30px;"></td>
-                        </tr>
-                     <%} %>
-              </tbody>
-            </table>
+                   </form>
+            <form method="post" action="./mypage_action2.jsp?name=<%=user_id%>&state=<%=user_state%>">
+            <div class="login_id"style="margin-top:20px;font-size:18px;">
+                <h4>ID</h4>
+                <span><%=user.getuserid()%></span>
             </div>
-            <div class="tables">
-                <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th>유저명</th>
-                  <th>구독자 수</th>
-                  <th>리뷰 개수</th>
-                  <th>평균 평점</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                  <%for (int i=0; i<subscribes.size();i++) {
-                %>
-                      <tr>
-                        <td><%=subscribes.get(i).getsubscribe_name() %></td>
-                        <td><%=subscribes.get(i).getsubscribe_count() %></td>
-                        <td><%=subscribes.get(i).getsubscribe_star() %></td>
-                        <td><%=subscribes.get(i).getuser_review_average() %></td>
-                        <td><input type="button" value="구독 취소" onclick="location.href='mypage_sub_action.jsp?name=<%=subscribes.get(i).get_subscribe_id()%>&user=<%=user_id%>&state=<%=user_state%>'" class="btn btn-danger btn-icon-split" class="btn btn-danger btn-icon-split" style="width: 90px;height: 30px;"></td>
-                        </tr>
-                     <%} %>
-              </tbody>
-           </table>
-                </div>
+            <div class="login_pw"style="margin-top:20px;font-size:18px;">
+                <h4>비밀번호</h4>
+                <input type="password" name="pw" placeholder="********">
+            </div>
+            <div class="login_id"style="margin-top:20px;font-size:18px;">
+                <h4>비밀번호 확인</h4>
+                <input type="password" name="pw2" placeholder="********">
+            </div>
+            <div class="login_pw"style="margin-top:20px;font-size:18px;">
+                <h4>E-Mail</h4>
+                <input type="email" name="email" placeholder="<%=user.getuseremail()%>">
+            </div>
+            <div class="login_pw"style="margin-top:20px;font-size:18px;">
+                <h4>전화번호</h4>
+                <input type="text" name="phone" placeholder="<%=user.getuserphone()%>">
+            </div>
+            <div class="submit" style="margin-top:20px;font-size:18px;">
+                <input type="submit" value="변경하기">
+            </div>
+            </form>
          </div>
          </div>
       </div>
